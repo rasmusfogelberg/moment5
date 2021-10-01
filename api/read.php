@@ -27,7 +27,7 @@ if(isset($_GET['id'])) {
 
   if ($result->rowCount() > 0) {
     http_response_code(200);
-    echo json_encode($result->fetch());
+    echo json_encode($result->fetchAll());
   } else {
     http_response_code(404);
     echo json_encode(['message' => 'There are no courses']);

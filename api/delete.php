@@ -2,8 +2,8 @@
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Typ, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Methods: DELETE');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../config/Database.php';
 include_once '../classes/Course.php';
@@ -13,13 +13,27 @@ $db = new Database();
 // Pass instance to entity class
 $course = new Course($db);
 
-// If we have an id-parameter with a value...
-if(isset($_GET['id'])) {
-  $courseId = $_GET['id'];
+$courseId = null;
 
-  // Get the info for that particular course
-  $result = $course->deleteCourse($courseId);
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    if (!is_numeric($_GET['id'])) {
+        http_response_code(400);
+        echo json_encode(['message' => 'Id parameter must be an integer']);
+    } else {
+        $courseId = intval($_GET['id']);
 
-/*   http_response_code(200);
-  echo json_encode($result->fetch()); */
-} 
+        // Delete that particular course
+        $result = $course->deleteCourse($courseId);
+
+        if ($result->rowCount() > 0) {
+            http_response_code(200);
+            echo json_encode(['message' => 'Course was deleted successfully.']);
+        } else {
+            http_response_code(404);
+            echo json_encode(['message' => 'What did you try to delete? There is nothing there, you loser!']);
+        }
+    }
+} else {
+    http_response_code(404);
+    echo json_encode(['message' => 'Id parameter is required']);
+}
