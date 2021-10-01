@@ -68,4 +68,19 @@ class Course
 
         return $statement;
     }
+
+    public function updateCourse($data)
+    {
+        $query = "UPDATE course SET 
+                  code=:code, 
+                  name=:name, 
+                  progression=:progression, 
+                  course_syllabus=:course_syllabus 
+                  WHERE id = :id";
+
+        $statement = $this->db->prepare($query);
+        $statement->execute(array('code' => $data->code, 'name' => $data->name, 'progression' => $data->progression, 'course_syllabus' => $data->course_syllabus, 'id' => $data->id));
+        
+        return $statement;
+    }
 }
