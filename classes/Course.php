@@ -81,7 +81,7 @@ class Course
     }
 
     public function updateCourse($data)
-    {
+    {             
         $data = clean($data);
 
         $query = "UPDATE course SET 
@@ -92,6 +92,7 @@ class Course
                   WHERE id = :id";
 
         $statement = $this->db->prepare($query);
+      
         $statement->execute(array('code' => $data->code, 'name' => $data->name, 'progression' => $data->progression, 'course_syllabus' => $data->course_syllabus, 'id' => $data->id));
         
         return $statement;

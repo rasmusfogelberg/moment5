@@ -19,7 +19,7 @@ if (isset($data->id, $data->code, $data->name, $data->progression, $data->course
 
     // Update that particular course
     $result = $course->updateCourse($data);
-    
+
     if ($result->rowCount() > 0) {
         http_response_code(200);
         echo json_encode(['message' => 'Course was updated successfully.']);
