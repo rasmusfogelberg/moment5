@@ -1,5 +1,7 @@
 <?php
 
+include_once '../functions.php';
+
 class Course
 {
     private $db;
@@ -55,6 +57,9 @@ class Course
 
     public function createCourse(string $code, string $name, string $progression, string $course_syllabus)
     {
+        $data = func_get_args();
+        $data = clean($data);
+
         $query = "INSERT INTO course (code, name, progression, course_syllabus)
                 VALUES (
                   :code,
@@ -62,15 +67,23 @@ class Course
                   :progression,
                   :course_syllabus
                 );";
-      
-        $statement = $this->db->prepare($query);
-        $statement->execute(array('code' => $code, 'name' => $name, 'progression' => $progression, 'course_syllabus' => $course_syllabus));
+    
+        try {
+            $statement = $this->db->prepare($query);
+            $options = array('code' => $code, 'name' => $name, 'progression' => $progression, 'course_syllabus' => $course_syllabus);
 
-        return $statement;
+            $statement->execute($options);
+            return $statement;
+        } catch (PDOException $e) {
+            // We do not want to rethrow the SQL exception, as that might show senitive info
+            return false;
+        }
     }
 
     public function updateCourse($data)
     {
+        $data = clean($data);
+
         $query = "UPDATE course SET 
                   code=:code, 
                   name=:name, 

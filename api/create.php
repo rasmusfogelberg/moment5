@@ -21,8 +21,13 @@ if(isset($data->code, $data->name, $data->progression, $data->course_syllabus)) 
   // Call mehtod and provide variables
   $result = $course->createCourse($data->code, $data->name, $data->progression, $data->course_syllabus);
 
-  http_response_code(200);
-  echo json_encode(['message' => 'Course was created successfully. Very good job. NOW GET BACK TO WORK!']);
+  if (!$result) {
+    http_response_code(400);
+    echo json_encode(['message' => 'Could not process request']);
+  } else {
+    http_response_code(200);
+    echo json_encode(['message' => 'Course was created successfully. Very good job. NOW GET BACK TO WORK!']);
+  }
 } else {
   http_response_code(404);
   echo json_encode(['message' => 'Must fill out all fields.']);
