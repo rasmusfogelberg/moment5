@@ -1,13 +1,14 @@
 <?php
 
+include_once 'secrets.php';
+
 // DB class inherits from the native PHP PDO class
 class Database extends PDO {
 
-  // TODO: These should not be hardcoded
-  private $host = '127.0.0.1';
-  private $username = 'root';
-  private $password = 'superdupersecret';
-  private $database = 'courses';
+  private $host = HOST;
+  private $username = USER;
+  private $password = PASSWORD;
+  private $database = DATABASE;
 
   public function __construct() 
   {
