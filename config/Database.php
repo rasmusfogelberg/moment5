@@ -1,21 +1,22 @@
 <?php
 
-class Database {
+// DB class inherits from the native PHP PDO class
+class Database extends PDO {
 
-  private $host = 'localhost:3306';
-  private $user = 'root';
+  // TODO: These should not be hardcoded
+  private $host = '127.0.0.1';
+  private $username = 'root';
   private $password = 'superdupersecret';
   private $database = 'courses';
 
-  private $db;
-
-  public function __construct()
+  public function __construct() 
   {
-      $this->db = new mysqli($host, $user, $password, $database);
+      $default_options = [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      ];
 
-      // Error handler
-      if ($this->db->connect_errno > 0) {
-          die('Error occurred at connection' . $this->db->connect_error);
-      }
+      // Call the native PDO class' constructor
+      parent::__construct("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password, $default_options);
   }
 }
