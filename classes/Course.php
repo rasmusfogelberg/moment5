@@ -30,6 +30,11 @@ class Course
         return $statement;
     }
 
+    /**
+     * Get single courses
+     *
+     */
+
     public function getSingleCourse(int $courseId)
     {
         $courseId = intval($courseId);
@@ -43,10 +48,14 @@ class Course
         return $statement;
     }
 
+    /**
+     * Delete a course
+     */
+
     public function deleteCourse(int $courseId)
     {
         $courseId = intval($courseId);
-      
+
         $query = "DELETE FROM course WHERE id = :courseId";
 
         $statement = $this->db->prepare($query);
@@ -54,6 +63,11 @@ class Course
 
         return $statement;
     }
+
+    /**
+     * Create a course
+     *
+     */
 
     public function createCourse(string $code, string $name, string $progression, string $course_syllabus)
     {
@@ -70,18 +84,22 @@ class Course
     
         try {
             $statement = $this->db->prepare($query);
-            $options = array('code' => $code, 'name' => $name, 'progression' => $progression, 'course_syllabus' => $course_syllabus);
+            $options = array('code' => $data[0], 'name' => $data[1], 'progression' => $data[2], 'course_syllabus' => $data[3]);
 
             $statement->execute($options);
             return $statement;
         } catch (PDOException $e) {
-            // We do not want to rethrow the SQL exception, as that might show senitive info
+            // Should not rethrow the SQL exception, as that might show senitive info
             return false;
         }
     }
 
+    /**
+     * Update a course
+     *
+     */
     public function updateCourse($data)
-    {             
+    {
         $data = clean($data);
 
         $query = "UPDATE course SET 
@@ -92,9 +110,8 @@ class Course
                   WHERE id = :id";
 
         $statement = $this->db->prepare($query);
-      
-        $statement->execute(array('code' => $data->code, 'name' => $data->name, 'progression' => $data->progression, 'course_syllabus' => $data->course_syllabus, 'id' => $data->id));
-        
+
+        $statement->execute(array('code' => $data['code'], 'name' => $data['name'], 'progression' => $data['progression'], 'course_syllabus' => $data['course_syllabus'], 'id' => $data['id']));
         return $statement;
     }
 }
