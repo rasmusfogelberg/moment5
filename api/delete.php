@@ -23,14 +23,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         $courseId = intval($_GET['id']);
 
         // Delete that particular course
-        $result = $course->deleteCourse($courseId);
-
-        if ($result->rowCount() > 0) {
+        if ($course->deleteCourse($courseId)) {
             http_response_code(200);
             echo json_encode(['message' => 'Course was deleted successfully.']);
         } else {
             http_response_code(404);
-            echo json_encode(['message' => 'What did you try to delete? There is nothing there, you loser!']);
+            echo json_encode(['message' => 'What did you try to delete? There is nothing there.']);
         }
     }
 } else {

@@ -54,14 +54,14 @@ class Course
 
     public function deleteCourse(int $courseId)
     {
-        $courseId = intval($courseId);
-
         $query = "DELETE FROM course WHERE id = :courseId";
 
         $statement = $this->db->prepare($query);
-        $statement->execute(array('courseId' => $courseId));
-
-        return $statement;
+        $statement->bindParam(':courseId', $courseId);
+        if ($statement->execute() && $statement->rowCount() > 0) {
+            return true;
+        }
+        return false;
     }
 
     /**
