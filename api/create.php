@@ -23,12 +23,12 @@ if(isset($data->code, $data->name, $data->progression, $data->course_syllabus)) 
 
   if (!$result) {
     http_response_code(400);
-    echo json_encode(['message' => 'Could not process request']);
+    echo json_encode(['message' => 'Could not process request.']);
   } else {
     http_response_code(200);
     echo json_encode(['message' => 'Course was created successfully.']);
   }
 } else {
-  http_response_code(404);
+  http_response_code(400);
   echo json_encode(['message' => 'Must fill out all fields.']);
 }

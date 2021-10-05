@@ -23,8 +23,11 @@ if (isset($data->id, $data->code, $data->name, $data->progression, $data->course
     if ($result->rowCount() > 0) {
         http_response_code(200);
         echo json_encode(['message' => 'Course was updated successfully.']);
+    } else {
+        http_response_code(404);
+        echo json_encode(['message' => 'There is nothing to update.']);
     }
 } else {
-    http_response_code(404);
-    echo json_encode(['message' => 'There is nothing to update.']);
+    http_response_code(400);
+    echo json_encode(['message' => 'Must fill out all fields.']);
 }

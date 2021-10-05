@@ -33,6 +33,6 @@ if (isset($data->id)) {
         echo json_encode(['message' => 'What did you try to delete? There is nothing there.']);
     }
 } else {
-    http_response_code(404);
+    http_response_code(400);
     echo json_encode(['message' => 'Id field is missing in request body']);
 }
