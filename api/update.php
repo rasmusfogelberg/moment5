@@ -8,13 +8,13 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
 include_once '../config/Database.php';
 include_once '../classes/Course.php';
 
-// Instatiate connection to database
+
 $db = new Database();
-// Pass instance to entity class
 $course = new Course($db);
 
 $data = json_decode(file_get_contents('php://input'));
 
+// If there is value set to the following parameters
 if (isset($data->id, $data->code, $data->name, $data->progression, $data->course_syllabus)) {
 
     // Update that particular course
@@ -26,5 +26,5 @@ if (isset($data->id, $data->code, $data->name, $data->progression, $data->course
     }
 } else {
     http_response_code(404);
-    echo json_encode(['message' => 'What did you try to update? There is nothing there, you loser!']);
+    echo json_encode(['message' => 'There is nothing to update.']);
 }

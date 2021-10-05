@@ -23,4 +23,4 @@ General:
 Find out how to:
  - [X] How to get rid of all deleted in git bash/ubuntu. It is so many that do it individually will take forever
  - [ ] 
- - [ ] 
+ - [ ]

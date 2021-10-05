@@ -3,7 +3,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Typ, Access-Control-Allow-Methods, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 include_once '../config/Database.php';
 include_once '../classes/Course.php';
@@ -15,10 +15,10 @@ $course = new Course($db);
 
 $data = json_decode(file_get_contents('php://input'));
 
-// Check if what has been gotten contains anything
+// Check if what has been sent contains anything
 if(isset($data->code, $data->name, $data->progression, $data->course_syllabus)) {
 
-  // Call mehtod and provide variables
+  // Call method and provide variables
   $result = $course->createCourse($data->code, $data->name, $data->progression, $data->course_syllabus);
 
   if (!$result) {
@@ -26,7 +26,7 @@ if(isset($data->code, $data->name, $data->progression, $data->course_syllabus)) 
     echo json_encode(['message' => 'Could not process request']);
   } else {
     http_response_code(200);
-    echo json_encode(['message' => 'Course was created successfully. Very good job. NOW GET BACK TO WORK!']);
+    echo json_encode(['message' => 'Course was created successfully.']);
   }
 } else {
   http_response_code(404);

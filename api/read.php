@@ -8,12 +8,12 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Typ,
 include_once '../config/Database.php';
 include_once '../classes/Course.php';
 
-// Instatiate connection to database
+
 $db = new Database();
-// Pass instance to entity class
+
 $course = new Course($db);
 
-// If we have an id-parameter with a value...
+// If there is an id-parameter with a value...
 if(isset($_GET['id'])) {
   $courseId = $_GET['id'];
 
@@ -23,6 +23,7 @@ if(isset($_GET['id'])) {
   http_response_code(200);
   echo json_encode($result->fetch());
 } else {
+  // If there is not an id-parameter with value
   $result = $course->getCourses();
 
   if ($result->rowCount() > 0) {
@@ -33,15 +34,3 @@ if(isset($_GET['id'])) {
     echo json_encode(['message' => 'There are no courses']);
   }
 } 
-
-
-/*
-function JSONResponse($httpStatus = 200, $data = null)
-{
-  header('Content-Type: application/json');
-
-  http_response_code($httpStatus);
-  echo json_encode($data);
-  exit();
-}
-*/

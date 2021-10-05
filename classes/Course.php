@@ -4,6 +4,8 @@ include_once '../functions.php';
 
 class Course
 {
+
+    // Declaring variables
     private $db;
 
     public $id;
@@ -18,7 +20,7 @@ class Course
     }
 
     /**
-     * Get all courses
+     * Get all courses from database
      *
      */
     public function getCourses()
@@ -50,6 +52,7 @@ class Course
 
     /**
      * Delete a course
+     * 
      */
 
     public function deleteCourse(int $courseId)
@@ -58,10 +61,17 @@ class Course
 
         $statement = $this->db->prepare($query);
         $statement->bindParam(':courseId', $courseId);
-        if ($statement->execute() && $statement->rowCount() > 0) {
-            return true;
+
+        if ($statement->execute()) {
+            // If a row has been affected, return true
+            if ($statement->rowCount()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -73,7 +83,7 @@ class Course
     {
         $data = func_get_args();
         $data = clean($data);
-
+        // Placeholders provides what values are sent to the database
         $query = "INSERT INTO course (code, name, progression, course_syllabus)
                 VALUES (
                   :code,
