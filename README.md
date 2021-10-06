@@ -19,8 +19,8 @@ In order to protect the database a clean()-function has been written and can be 
 
 The URI:s used in this REST API are the following:
 
-- [Create a new course](./docs/courses/post.md): `POST http://api.fogelcode.com/moment5/api/create.php`
-- [Get all courses](./docs/courses/get.md): `GET http://api.fogelcode.com/moment5/api/read.php`
-- [Get a single course](./docs/courses/courseId/get.md): `GET http://api.fogelcode.com/moment5/api/read.php?id=:courseId`
-- [Update a course](./docs/courses/put.md): `PUT http://api.fogelcode.com/moment5/api/update.php`
-- [Delete a course](./docs/courses/delete.md): `DELETE http://api.fogelcode.com/moment5/api/delete.php`
+- [Create a new course](./docs/courses/post.md): `POST https://api.fogelcode.com/moment5/api/create.php`
+- [Get all courses](./docs/courses/get.md): `GET https://api.fogelcode.com/moment5/api/read.php`
+- [Get a single course](./docs/courses/courseId/get.md): `GET https://api.fogelcode.com/moment5/api/read.php?id=:courseId`
+- [Update a course](./docs/courses/put.md): `PUT https://api.fogelcode.com/moment5/api/update.php`
+- [Delete a course](./docs/courses/delete.md): `DELETE https://api.fogelcode.com/moment5/api/delete.php`
