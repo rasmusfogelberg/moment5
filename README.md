@@ -13,9 +13,9 @@ For this assignments REST webservice, 4 different php files were used to handle 
 - update.php handles request methods with PUT
 - delete.php handles request methods with DELETE
 
-There is also a class-file named Database.php that handles the connection with the SQL database. This is called on in every method php-file. In each of the metod-files the class php.file Course.php is called. This class-file contains the methods that is wrting the SQL-querys for the database. if, for example, delelte.php i requested with a vaild id, it will use the method deleteCourse to write a SQL query to delete that specific course from the database.
+There is also a class-file named Database.php that handles the connection with the SQL database. This is called on in every method php-file. In each of the metod-files the class php.file Course.php is called. This class-file contains the methods that is wrting the SQL-querys for the database.
 
-In order to protect the database a clean()-function has been written and can be found in the functions.php file in the root-folder. This will strip any text that is inputed to make sure `<script>`-tags are removed.
+In order to protect the database a clean()-function has been written and can be found in the functions.php file in the root-folder. This will strip any text that is inputed to make sure `<script>`-tags or other harmful code is removed.
 
 The URI:s used in this REST API are the following:
 
